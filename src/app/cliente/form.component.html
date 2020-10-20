@@ -1,0 +1,66 @@
+<ul class="alert alert-danger" *ngIf="errores?.length > 0">
+  <li *ngFor="let err of errores"> {{err}}</li>
+</ul>
+
+<div class="card bg-dark text-white">
+
+  <div class="card-body">
+    <div class="card-header"> {{titulo}}</div>
+    <div class="card-body">
+
+  <form #formCliente = "ngForm">
+
+      <fieldset class="form-group ">
+      <label for="nombre" class="col-form col-sm-2">Nombre</label>
+      <input type="text" class="form-control"  placeholder="Digita Nombre" [(ngModel)]='cliente.nombre' name="nombre"
+      #nombre ="ngModel"> <!-- required minlength="4" -->
+      <div class="alert alert-danger" *ngIf="nombre.invalid && (nombre.touched || nombre.dirty)">
+        <div class="" *ngIf="nombre.errors.required">
+          Nombre es requerido
+        </div>
+        <div class="" *ngIf="nombre.errors.minlength">
+          Nombre debe tener minimo 4 caracteres
+        </div>
+
+      </div>
+      </fieldset>
+
+      <fieldset class="form-group">
+      <label for="apellido" class="col-form col-sm-2">Apellido</label>
+      <input type="text" class="form-control"  placeholder="Digita Apellido" [(ngModel)]='cliente.apellido' name="apellido"
+      #apellido ="ngModel">  <!-- required -->
+      <div class="alert alert-danger" *ngIf="apellido.invalid && (apellido.touched || apellido.dirty)">
+        <div class="" *ngIf="apellido.errors.required">
+          Apellido es requerido
+        </div>
+
+      </div>
+      </fieldset>
+
+      <fieldset class="form-group">
+      <label for="correo" class="col-form col-sm-2">Correo</label>
+      <input type="text" class="form-control"  placeholder="Digita Correo" [(ngModel)]='cliente.correo' name="correo"
+      #correo ="ngModel">  <!-- required email-->
+      <div class="alert alert-danger" *ngIf="correo.invalid && (correo.touched || correo.dirty)">
+        <div class="" *ngIf="correo.errors.required">
+          Correo es requerido
+        </div>
+        <div class="" *ngIf="correo.errors.email">
+          Correo formato invalido
+        </div>
+      </div>
+      </fieldset>
+
+      <fieldset class="form-group">
+          <button  class="btn btn-primary" role="button" name="button" (click)="create()" *ngIf="!cliente.id else elseBlock"
+          [disabled] ="!formCliente.form.valid">Guardar</button>
+          <ng-template #elseBlock>
+            <button  class="btn btn-primary" role="button" name="button" (click)="update()"
+              [disabled] ="!formCliente.form.valid">Editar</button>
+          </ng-template>
+
+      </fieldset>
+  </form>
+    </div>
+  </div>
+</div>
