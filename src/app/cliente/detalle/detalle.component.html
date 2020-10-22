@@ -1,0 +1,38 @@
+<div class="card bg bg-dark text-white" >
+  <div class="card-header">
+    {{titulo}}
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-8">
+        <ul class="list-group text-dark mb-3" *ngIf="cliente">
+          <li class="list-group-item active">{{cliente.nombre}}</li>
+          <li class="list-group-item ">{{cliente.apellido}}</li>
+          <li class="list-group-item">{{cliente.correo}}</li>
+          <li class="list-group-item">{{cliente.createAt}}</li>
+
+        </ul>
+
+        <div class="input-group">
+          <div class="custom-file">
+            <input type="file" (change) = "seleccionarFoto($event)"
+            class="custom-file-input" id="inputGroupFile04">
+            <label class="custom-file-label" for="inputGroupFile04">Seleccionar imagen</label>
+          </div>
+
+          <div class="input-group-append">
+            <button (click) = "subirFoto()" [disabled]="!fotoSeleccionada" class="btn btn-outline-secondary" type="button">Subir</button>
+          </div>
+
+        </div>
+      </div>
+      <div class="img-container col-sm-4">
+        <img *ngIf="cliente?.foto" src="http://localhost:8084/api/uploads/img/{{cliente.foto}}"
+        alt="{{cliente.foto}}" class="img-fluid img-thumbnail rounded">
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+
+  </div>
+</div>

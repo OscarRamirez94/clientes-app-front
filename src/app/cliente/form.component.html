@@ -12,6 +12,7 @@
 
       <fieldset class="form-group ">
       <label for="nombre" class="col-form col-sm-2">Nombre</label>
+      <div  class="col-sm-8">
       <input type="text" class="form-control"  placeholder="Digita Nombre" [(ngModel)]='cliente.nombre' name="nombre"
       #nombre ="ngModel"> <!-- required minlength="4" -->
       <div class="alert alert-danger" *ngIf="nombre.invalid && (nombre.touched || nombre.dirty)">
@@ -21,24 +22,26 @@
         <div class="" *ngIf="nombre.errors.minlength">
           Nombre debe tener minimo 4 caracteres
         </div>
-
+      </div>
       </div>
       </fieldset>
 
       <fieldset class="form-group">
       <label for="apellido" class="col-form col-sm-2">Apellido</label>
+      <div  class="col-sm-8">
       <input type="text" class="form-control"  placeholder="Digita Apellido" [(ngModel)]='cliente.apellido' name="apellido"
       #apellido ="ngModel">  <!-- required -->
       <div class="alert alert-danger" *ngIf="apellido.invalid && (apellido.touched || apellido.dirty)">
         <div class="" *ngIf="apellido.errors.required">
           Apellido es requerido
         </div>
-
+      </div>
       </div>
       </fieldset>
 
       <fieldset class="form-group">
       <label for="correo" class="col-form col-sm-2">Correo</label>
+      <div  class="col-sm-8">
       <input type="text" class="form-control"  placeholder="Digita Correo" [(ngModel)]='cliente.correo' name="correo"
       #correo ="ngModel">  <!-- required email-->
       <div class="alert alert-danger" *ngIf="correo.invalid && (correo.touched || correo.dirty)">
@@ -49,18 +52,35 @@
           Correo formato invalido
         </div>
       </div>
+      </div>
       </fieldset>
 
-      <fieldset class="form-group">
-          <button  class="btn btn-primary" role="button" name="button" (click)="create()" *ngIf="!cliente.id else elseBlock"
-          [disabled] ="!formCliente.form.valid">Guardar</button>
-          <ng-template #elseBlock>
-            <button  class="btn btn-primary" role="button" name="button" (click)="update()"
-              [disabled] ="!formCliente.form.valid">Editar</button>
-          </ng-template>
 
+      <fieldset class="form-group">
+
+        <label for="createAt" class="col-form col-sm-2">Fecha</label>
+        <div  class="col-sm-8">
+        <mat-form-field appearance="fill">
+
+          <input matInput [matDatepicker]="picker" class="form-control" style="width: 200px; display: inline;"
+          placeholder="Digita Fecha" [(ngModel)]='cliente.createAt' name="createAt" >
+          <mat-datepicker-toggle matSuffix [for]="picker"  ></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+         </div>
+      </fieldset>
+      <fieldset class="form-group">
+              <div  class="col-sm-8">
+                <button  class="btn btn-primary" role="button" name="button" (click)="create()" *ngIf="!cliente.id else elseBlock"
+                [disabled] ="!formCliente.form.valid">Guardar</button>
+                <ng-template #elseBlock>
+                  <button  class="btn btn-primary" role="button" name="button" (click)="update()"
+                    [disabled] ="!formCliente.form.valid">Editar</button>
+                </ng-template>
+              </div>
       </fieldset>
   </form>
     </div>
   </div>
 </div>
+

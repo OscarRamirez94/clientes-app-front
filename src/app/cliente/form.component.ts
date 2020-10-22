@@ -16,6 +16,10 @@ export class FormComponent implements OnInit {
   public titulo :string = "Crear Cliente";
   public errores :String[];
 
+
+
+
+
   constructor(private clienteService :ClienteService, private router :Router ,private activatedRoute :ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -58,5 +62,7 @@ export class FormComponent implements OnInit {
         }
       )
   }
+
+
 
 }

@@ -15,6 +15,10 @@ import { PaginadorComponent } from './paginador/paginador.component';
 import { FormComponent } from './cliente/form.component';
 import { HttpClientModule} from '@angular/common/http';
 import { ClienteService } from './cliente/cliente.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatMomentDateModule } from '@angular/material-moment-adapter';
+import { DetalleComponent } from './cliente/detalle/detalle.component';
 
 
 
@@ -25,6 +29,7 @@ const routes: Routes = [
   { path: 'clientes', component: ClienteComponent },
   { path: 'clientes/page/:page', component: ClienteComponent },
   { path: 'clientes/form', component: FormComponent },
+  { path: 'clientes/detalle/:id', component: DetalleComponent },
   { path: 'clientes/form/:id', component: FormComponent }
 ];
 
@@ -35,7 +40,8 @@ const routes: Routes = [
       FooterComponent,
       ClienteComponent,
       PaginadorComponent,
-      FormComponent
+      FormComponent,
+      DetalleComponent
 
    ],
   imports: [
@@ -43,7 +49,10 @@ const routes: Routes = [
     HttpClientModule,
     AppRoutingModule,
     FormsModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    BrowserAnimationsModule,
+    MatDatepickerModule,
+    MatMomentDateModule
   ],
   exports:[
     ClienteComponent

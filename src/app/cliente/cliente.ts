@@ -4,4 +4,5 @@ export class Cliente {
   apellido :String;
   createAt :String;
   correo: String;
+  foto : String;
 }
