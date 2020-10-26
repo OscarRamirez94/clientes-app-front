@@ -3,16 +3,14 @@
 </ul>
 
 <div class="card bg-dark text-white">
-
   <div class="card-body">
     <div class="card-header"> {{titulo}}</div>
     <div class="card-body">
 
   <form #formCliente = "ngForm">
-
-      <fieldset class="form-group ">
-      <label for="nombre" class="col-form col-sm-2">Nombre</label>
-      <div  class="col-sm-8">
+    <fieldset class="form-group ">
+    <label for="nombre" class="col-form col-sm-2">Nombre</label>
+    <div  class="col-sm-8">
       <input type="text" class="form-control"  placeholder="Digita Nombre" [(ngModel)]='cliente.nombre' name="nombre"
       #nombre ="ngModel"> <!-- required minlength="4" -->
       <div class="alert alert-danger" *ngIf="nombre.invalid && (nombre.touched || nombre.dirty)">
@@ -20,24 +18,24 @@
           Nombre es requerido
         </div>
         <div class="" *ngIf="nombre.errors.minlength">
-          Nombre debe tener minimo 4 caracteres
+            Nombre debe tener minimo 4 caracteres
         </div>
       </div>
-      </div>
-      </fieldset>
+    </div>
+    </fieldset>
 
-      <fieldset class="form-group">
+    <fieldset class="form-group">
       <label for="apellido" class="col-form col-sm-2">Apellido</label>
       <div  class="col-sm-8">
-      <input type="text" class="form-control"  placeholder="Digita Apellido" [(ngModel)]='cliente.apellido' name="apellido"
-      #apellido ="ngModel">  <!-- required -->
-      <div class="alert alert-danger" *ngIf="apellido.invalid && (apellido.touched || apellido.dirty)">
-        <div class="" *ngIf="apellido.errors.required">
-          Apellido es requerido
+        <input type="text" class="form-control"  placeholder="Digita Apellido" [(ngModel)]='cliente.apellido' name="apellido"
+        #apellido ="ngModel">  <!-- required -->
+        <div class="alert alert-danger" *ngIf="apellido.invalid && (apellido.touched || apellido.dirty)">
+          <div class="" *ngIf="apellido.errors.required">
+            Apellido es requerido
+          </div>
         </div>
       </div>
-      </div>
-      </fieldset>
+    </fieldset>
 
       <fieldset class="form-group">
       <label for="correo" class="col-form col-sm-2">Correo</label>
@@ -69,6 +67,20 @@
         </mat-form-field>
          </div>
       </fieldset>
+
+      <fieldset class="form-group">
+
+        <label for="Regiones" class="col-form col-sm-2">Regiones</label>
+        <div  class="col-sm-8">
+        <select [compareWith]="comparaRegion" class="form-control" placeholder="Selecciona Region" [(ngModel)]='cliente.region'
+        name="region" >
+        <option  [ngValue]="undefined"> "Selecciona Region"</option>
+          <option *ngFor="let region of regiones" [ngValue]="region"> {{region.nombre}}</option>
+        </select>
+         </div>
+      </fieldset>
+
+
       <fieldset class="form-group">
               <div  class="col-sm-8">
                 <button  class="btn btn-primary" role="button" name="button" (click)="create()" *ngIf="!cliente.id else elseBlock"
@@ -77,8 +89,8 @@
                   <button  class="btn btn-primary" role="button" name="button" (click)="update()"
                     [disabled] ="!formCliente.form.valid">Editar</button>
                 </ng-template>
-      </div>
-            </fieldset>
+              </div>
+        </fieldset>
   </form>
     </div>
   </div>

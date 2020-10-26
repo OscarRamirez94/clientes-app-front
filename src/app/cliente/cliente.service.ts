@@ -9,13 +9,21 @@ import {HttpClient,HttpEvent,HttpHeaders, HttpRequest} from '@angular/common/htt
 import {map,catchError,tap} from 'rxjs/operators';
 import swal from 'sweetalert2';
 import {Router} from '@angular/router';
+import { Region } from './region';
 
 @Injectable()
 export class ClienteService {
   url :string =  "http://localhost:8084/api/clientes";
   httpHeaders = new HttpHeaders({'Content-type': 'application/json'});
 
+
 constructor(private http: HttpClient, private router :Router) { }
+
+getRegiones() :Observable<Region[]>{
+return this.http.get<Region[]>(this.url + '/regiones');
+
+}
+
 getClientes(page :number) : Observable<any> {
   //return of(CLIENTES);
   //return CLIENTES.asObservable();
@@ -43,7 +51,7 @@ getClientes(page :number) : Observable<any> {
     tap(response =>{
       (response.content as Cliente[]).forEach(
           cliente =>{
-            console.log("tap 2 clientes :: " , cliente.nombre);
+            console.log("tap 2 clientes :: " , cliente.region.nombre);
           }
         )
     }),
