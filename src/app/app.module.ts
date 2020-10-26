@@ -19,6 +19,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { DetalleComponent } from './cliente/detalle/detalle.component';
+import { ModalService } from './cliente/detalle/modal.service';
 
 
 
@@ -29,7 +30,7 @@ const routes: Routes = [
   { path: 'clientes', component: ClienteComponent },
   { path: 'clientes/page/:page', component: ClienteComponent },
   { path: 'clientes/form', component: FormComponent },
-  { path: 'clientes/detalle/:id', component: DetalleComponent },
+  //{ path: 'clientes/detalle/:id', component: DetalleComponent },
   { path: 'clientes/form/:id', component: FormComponent }
 ];
 
@@ -57,7 +58,7 @@ const routes: Routes = [
   exports:[
     ClienteComponent
   ],
-  providers: [ClienteService ],
+  providers: [ClienteService, ModalService],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]
 })

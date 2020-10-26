@@ -3,8 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import {Cliente} from './cliente';
 import {ClienteService} from './cliente.service';
 import swal from 'sweetalert2';
-import {tap} from 'rxjs/operators';
+import {map, tap} from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
+import { ModalService } from './detalle/modal.service';
 
 @Component({
   selector: 'app-cliente',
@@ -14,8 +15,9 @@ import { ActivatedRoute } from '@angular/router';
 export class ClienteComponent implements OnInit {
   clientes : Cliente[];
   paginador :any;
+  clienteSeleccionado :Cliente;
 
-  constructor(private clienteService :ClienteService, private activatedRoute :ActivatedRoute) { }
+  constructor(private clienteService :ClienteService, private activatedRoute :ActivatedRoute, private modalService :ModalService) { }
 
   ngOnInit() {
 
@@ -37,6 +39,14 @@ export class ClienteComponent implements OnInit {
           this.paginador = response;
         });
     });
+    this.modalService.notificarUpload.subscribe( cliente =>{
+      this.clientes = this.clientes.map(clienteOrginal =>{
+        if(cliente.id == clienteOrginal.id ){
+          clienteOrginal.foto = cliente.foto;
+        }
+        return clienteOrginal;
+      })
+    })
   }
 
   public delete (cliente :Cliente) :void{
@@ -66,6 +76,12 @@ export class ClienteComponent implements OnInit {
   }
 })
 
+  }
+  abrirModal(cliente :Cliente){
+
+    console.log("cliente:: ", cliente);
+    this.clienteSeleccionado = cliente;
+    this.modalService.abriModal();
   }
 
 }
