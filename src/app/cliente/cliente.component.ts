@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-
 import {Cliente} from './cliente';
 import {ClienteService} from './cliente.service';
 import swal from 'sweetalert2';
@@ -7,6 +6,7 @@ import {map, tap} from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 import { ModalService } from './detalle/modal.service';
 import { Region } from './region';
+import { AuthService } from '../usuarios/auth.service';
 
 @Component({
   selector: 'app-cliente',
@@ -17,9 +17,10 @@ export class ClienteComponent implements OnInit {
   clientes : Cliente[];
   paginador :any;
   clienteSeleccionado :Cliente;
-  region :Region;
 
-  constructor(private clienteService :ClienteService, private activatedRoute :ActivatedRoute, private modalService :ModalService) { }
+
+  constructor(private clienteService :ClienteService, private activatedRoute :ActivatedRoute,
+     private modalService :ModalService, public authService :AuthService) { }
 
   ngOnInit() {
 

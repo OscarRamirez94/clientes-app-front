@@ -20,6 +20,9 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { DetalleComponent } from './cliente/detalle/detalle.component';
 import { ModalService } from './cliente/detalle/modal.service';
+import { LoginComponent } from './usuarios/login.component';
+import { AuthGuard } from './usuarios/guards/auth.guard';
+import { RoleGuard } from './usuarios/guards/role.guard';
 
 
 
@@ -29,9 +32,10 @@ const routes: Routes = [
   { path: '', redirectTo: '/clientes', pathMatch: 'full' },
   { path: 'clientes', component: ClienteComponent },
   { path: 'clientes/page/:page', component: ClienteComponent },
-  { path: 'clientes/form', component: FormComponent },
+  { path: 'clientes/form', component: FormComponent, canActivate:[AuthGuard,RoleGuard], data: {role :'ROLE_ADMIN'} },
   //{ path: 'clientes/detalle/:id', component: DetalleComponent },
-  { path: 'clientes/form/:id', component: FormComponent }
+  { path: 'clientes/form/:id', component: FormComponent,canActivate:[AuthGuard,RoleGuard], data: {role :'ROLE_ADMIN'}},
+  { path: 'login', component: LoginComponent }
 ];
 
 @NgModule({
@@ -42,7 +46,8 @@ const routes: Routes = [
       ClienteComponent,
       PaginadorComponent,
       FormComponent,
-      DetalleComponent
+      DetalleComponent,
+      LoginComponent
 
    ],
   imports: [

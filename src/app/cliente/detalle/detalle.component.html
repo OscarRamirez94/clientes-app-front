@@ -20,14 +20,14 @@
                 <li class="list-group-item">{{cliente.region.nombre}}</li>
               </ul>
 
-              <div class="input-group mb-3">
+              <div class="input-group mb-3" *ngIf="authService.hasRole('ROLE_ADMIN')">
                 <div class="custom-file">
                   <input type="file" (change) = "seleccionarFoto($event)"
                   class="custom-file-input" id="inputGroupFile04">
                   <label class="custom-file-label" for="inputGroupFile04">Seleccionar imagen</label>
                 </div>
 
-                <div class="input-group-append">
+                <div  class="input-group-append">
                   <button (click) = "subirFoto()" [disabled]="!fotoSeleccionada" class="btn btn-outline-secondary" type="button">Subir</button>
                 </div>
 
