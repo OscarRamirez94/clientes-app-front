@@ -1,6 +1,6 @@
 <div class ="abrirModal animacion fadeIn" *ngIf="modalService.modal">
-<div class="modal" *ngIf="modalService.modal"  style="display: block;" tabindex="-1" role="dialog">
-  <div class="modal-dialog modal-lg" role="document">
+<div class="modal " *ngIf="modalService.modal"  style="display: block;" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-lg " role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">{{titulo}}</h5>
@@ -8,7 +8,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
+      <div class="modal-body  bg-light" >
         <div class="container">
           <div class="row">
             <div class="col-sm-8">
@@ -44,6 +44,37 @@
               <img *ngIf="cliente?.foto" src="http://localhost:8084/api/uploads/img/{{cliente.foto}}"
               alt="{{cliente.foto}}" class="img-fluid img-thumbnail rounded">
             </div>
+          </div>
+          <div class="row">
+            <div class="alert alert-info" role="alert" *ngIf="cliente.facturas.length==0">
+             No hay facturas Asignadas {{cliente.nombre}}
+            </div>
+            <table class="table table-bordered table-striped my-4" *ngIf="cliente.facturas.length>0">
+              <thead>
+                <tr>
+                  <th>Folio</th>
+                  <th>Descripcion</th>
+                  <th>Fecha</th>
+                  <th>Total</th>
+                  <th>Detalle</th>
+                  <th>Eliminar</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let factura of cliente.facturas">
+                  <th>{{factura.id}}</th>
+                  <th>{{factura.descripcion}}</th>
+                  <th>{{factura.createAt}}</th>
+                  <th>{{factura.total}}</th>
+                  <th> <button class="btn btn-primary btn-sm" type="button"
+                    [routerLink] = "['/facturas',factura.id]">ver</button>
+                  </th>
+                  <th> <button class="btn btn-danger btn-sm" type="button"
+                    (click)="deleteFactura(factura)">Eliminar</button>
+                  </th>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>

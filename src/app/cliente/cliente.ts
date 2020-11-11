@@ -1,3 +1,4 @@
+import { Factura } from '../facturas/models/factura';
 import { Region } from './region';
 
 
@@ -9,4 +10,5 @@ export class Cliente {
   correo: String;
   foto : String;
   region : Region;
+  facturas :Array<Factura> = [];
 }
