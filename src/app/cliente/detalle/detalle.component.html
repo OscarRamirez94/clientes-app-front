@@ -10,6 +10,7 @@
       </div>
       <div class="modal-body  bg-light" >
         <div class="container">
+
           <div class="row">
             <div class="col-sm-8">
               <ul class="list-group text-dark mb-3" *ngIf="cliente">
@@ -46,6 +47,10 @@
             </div>
           </div>
           <div class="row">
+            <button type="button" class="btn btn-success  btn-sm" name="button"
+        [routerLink] = "['/facturas/form',cliente.id]">Crear Factura</button>
+          </div>
+          <div class="row">
             <div class="alert alert-info" role="alert" *ngIf="cliente.facturas.length==0">
              No hay facturas Asignadas {{cliente.nombre}}
             </div>
@@ -79,7 +84,7 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" (click)="cerrarModal()" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        <button type="button" (click)="cerrarModal()" class="btn btn-secondary  btn-sm" data-dismiss="modal">Cerrar</button>
 
       </div>
     </div>

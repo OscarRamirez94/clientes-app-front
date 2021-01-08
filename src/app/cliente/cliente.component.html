@@ -19,6 +19,7 @@
       <th>Apellido</th>
       <th>Correo</th>
       <th>Fecha</th>
+      <th>Crear Factura</th>
       <th *ngIf="authService.hasRole('ROLE_ADMIN')">Editar</th>
       <th *ngIf="authService.hasRole('ROLE_ADMIN')">Eliminar</th>
     </tr>
@@ -38,8 +39,10 @@
       <td>{{cliente.apellido}}</td>
       <td>{{cliente.correo}}</td>
       <td>{{cliente.createAt}}</td>
-      <td *ngIf="authService.hasRole('ROLE_ADMIN')"><button type="button" class="btn btn-primary" name="button" [routerLink] = "['/clientes/form',cliente.id]">Editar</button></td>
-      <td *ngIf="authService.hasRole('ROLE_ADMIN')"><button type="button" class="btn btn-danger" name="button" (click) = "delete(cliente)">Eliminar</button></td>
+      <td><button type="button" class="btn btn-success btn-sm" name="button"
+        [routerLink] = "['/facturas/form',cliente.id]">Crear Factura</button></td>
+      <td *ngIf="authService.hasRole('ROLE_ADMIN')"><button type="button" class="btn btn-primary  btn-sm" name="button" [routerLink] = "['/clientes/form',cliente.id]">Editar</button></td>
+      <td *ngIf="authService.hasRole('ROLE_ADMIN')"><button type="button" class="btn btn-danger  btn-sm" name="button" (click) = "delete(cliente)">Eliminar</button></td>
     </tr>
   </tbody>
 </table>

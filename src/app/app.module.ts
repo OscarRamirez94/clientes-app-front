@@ -4,7 +4,7 @@ import {registerLocaleData } from '@angular/common';
 import localeEsMx from '@angular/common/locales/es-MX';
 
 import {RouterModule, Routes} from '@angular/router';
-import {FormsModule} from '@angular/forms';
+import {FormsModule,ReactiveFormsModule} from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -26,9 +26,10 @@ import { RoleGuard } from './usuarios/guards/role.guard';
 import { TokenInterceptor } from './usuarios/interceptors/token.interceptor';
 import { AuthInterceptor } from './usuarios/interceptors/auth.interceptor';
 import { DetalleFacturaComponent } from './facturas/detalle-factura.component';
-
-
-
+import { FacturasComponent } from './facturas/facturas.component';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
 registerLocaleData(localeEsMx,'es');
 
 const routes: Routes = [
@@ -39,6 +40,7 @@ const routes: Routes = [
   //{ path: 'clientes/detalle/:id', component: DetalleComponent },
   { path: 'clientes/form/:id', component: FormComponent,canActivate:[AuthGuard,RoleGuard], data: {role :'ROLE_ADMIN'}},
   { path: 'facturas/:id', component: DetalleFacturaComponent},
+  { path: 'facturas/form/:clienteId', component: FacturasComponent},
   { path: 'login', component: LoginComponent }
 ];
 
@@ -52,7 +54,8 @@ const routes: Routes = [
       FormComponent,
       DetalleComponent,
       LoginComponent,
-      DetalleFacturaComponent
+      DetalleFacturaComponent,
+      FacturasComponent
 
    ],
   imports: [
@@ -63,7 +66,12 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     BrowserAnimationsModule,
     MatDatepickerModule,
-    MatMomentDateModule
+    MatMomentDateModule,
+    MatAutocompleteModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule
+
   ],
   exports:[
     ClienteComponent
