@@ -110,12 +110,12 @@ eliminarItemFactura(id: number) :void{
  this.factura.items = this.factura.items.filter((item: ItemFactura) => id !== item.producto.id);
 }
 crearFactura(facturaForm) :void{
-/*
+
   if(this.factura.items.length == 0){
     this.autocompleteControl.setErrors({'invalid':true})
   }
-*/
-  if(facturaForm.form.invalid && this.factura.items.length > 0){
+
+  if(facturaForm.form.valid && this.factura.items.length > 0){
   this.facturaService.createFactura(this.factura).subscribe(factura =>{
   swal.fire("factura", 'factura '+  this.factura.descripcion +' creada con éxito',"success");
   this.router.navigate(['/clientes']);
